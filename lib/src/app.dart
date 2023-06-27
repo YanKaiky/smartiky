@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smartiky/src/screens/home.screen.dart';
+import 'package:smartiky/src/screens/statistics.screen.dart';
 import 'package:smartiky/utils/colors.dart';
 
 class App extends StatelessWidget {
@@ -22,7 +22,8 @@ class App extends StatelessWidget {
               bodyText2: const TextStyle(color: AppColors.text),
             ),
       ),
-      home: const HomeScreen(),
+      // home: const HomeScreen(),
+      home: const StatisticsScreen(),
     );
   }
 }
