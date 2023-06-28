@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartiky/src/screens/home.screen.dart';
+import 'package:smartiky/src/screens/new.balance.dart';
 import 'package:smartiky/src/screens/statistics.screen.dart';
 import 'package:smartiky/utils/colors.dart';
 import 'package:smartiky/utils/constants.dart';
@@ -25,7 +26,13 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
     return Scaffold(
       body: screen[menuIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return const NewBalance();
+            },
+          ));
+        },
         backgroundColor: AppColors.primary,
         child: const Icon(Icons.add),
       ),
