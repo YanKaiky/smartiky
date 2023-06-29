@@ -26,7 +26,7 @@ class TitleListStatistics extends StatelessWidget {
         ),
         Icon(
           icon,
-          color: Colors.grey,
+          color: AppColors.grey,
           size: 25,
         ),
       ],

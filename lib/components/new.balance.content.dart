@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:smartiky/components/dropdown.new.balance.list.dart';
 import 'package:smartiky/utils/colors.dart';
 import 'package:smartiky/utils/constants.dart';
-import 'package:smartiky/utils/masks.dart';
 
 class NewBalanceContent extends StatefulWidget {
   const NewBalanceContent({
@@ -13,7 +13,8 @@ class NewBalanceContent extends StatefulWidget {
 }
 
 class _NewBalanceContentState extends State<NewBalanceContent> {
-  String? selectedItem;
+  final TextEditingController explain = TextEditingController();
+  String selectedItem = "Others";
   final List<String> items = [
     "Coffee",
     "Disney+",
@@ -47,77 +48,30 @@ class _NewBalanceContentState extends State<NewBalanceContent> {
         width: 340,
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding + 5,
-              ),
-              width: 300,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  width: 1,
-                  color: Colors.grey,
-                ),
-              ),
-              child: DropdownButton<String>(
-                value: selectedItem,
-                items: items.map((e) {
-                  return DropdownMenuItem(
-                    value: e,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 25,
-                          child: Image.asset(icons(e)),
-                        ),
-                        const SizedBox(width: defaultPadding * 2),
-                        Text(
-                          e,
-                          style: const TextStyle(
-                            fontSize: defaultPadding + 5,
-                            color: AppColors.text,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
-                selectedItemBuilder: (BuildContext context) {
-                  return items.map(
-                    (e) {
-                      return Row(
-                        children: [
-                          SizedBox(
-                            width: 30,
-                            child: Image.asset(icons(e)),
-                          ),
-                          const SizedBox(width: defaultPadding * 2),
-                          Text(
-                            e,
-                            style: const TextStyle(
-                              fontSize: defaultPadding + 5,
-                              color: AppColors.text,
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ).toList();
-                },
-                hint: const Text(
-                  "Name",
-                  style: TextStyle(
-                    color: Colors.grey,
+            DropDownNewBalanceList(
+              onChanged: (value) {
+                setState(() {
+                  selectedItem = value!;
+                });
+              },
+              items: items,
+              value: selectedItem,
+            ),
+            const SizedBox(height: 50),
+            TextField(
+              controller: explain,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.all(defaultPadding + 5),
+                labelText: "Explain",
+                filled: true,
+                labelStyle: TextStyle(color: AppColors.grey.shade600),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    width: 3,
+                    color: AppColors.title,
                   ),
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
-                dropdownColor: AppColors.white,
-                isExpanded: true,
-                underline: Container(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedItem = value;
-                  });
-                },
               ),
             ),
           ],

@@ -57,7 +57,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           height: 40,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.grey,
+                              color: AppColors.grey,
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(8),
@@ -68,7 +68,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                               Text('Expense'),
                               Icon(
                                 Icons.arrow_downward_sharp,
-                                color: Colors.grey,
+                                color: AppColors.grey,
                               ),
                             ],
                           ),

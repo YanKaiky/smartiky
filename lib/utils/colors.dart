@@ -13,4 +13,5 @@ class AppColors {
   static const bgcolorTertiary = Color(0xFF24242E);
   static const white = Colors.white;
   static const backWhite = Color.fromRGBO(255, 255, 255, 0.3);
+  static const grey = Colors.grey;
 }
