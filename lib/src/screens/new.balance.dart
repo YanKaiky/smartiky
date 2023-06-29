@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smartiky/components/new.balance.content.dart';
+import 'package:smartiky/components/new.balance.header.dart';
 import 'package:smartiky/utils/colors.dart';
 
 class NewBalance extends StatelessWidget {
@@ -9,9 +11,14 @@ class NewBalance extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.bgcolor,
       body: SafeArea(
-          child: Stack(
-        children: const [],
-      )),
+        child: Stack(
+          alignment: AlignmentDirectional.center,
+          children: const [
+            NewBalanceHeader(),
+            NewBalanceContent(),
+          ],
+        ),
+      ),
     );
   }
 }

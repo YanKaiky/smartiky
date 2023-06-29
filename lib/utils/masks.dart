@@ -13,20 +13,21 @@ String ptBRDate(String value) {
 }
 
 String icons(String category) {
-  if (category == 'netflix') return 'assets/netflix.png';
-  if (category == 'hbo') return 'assets/hbo.png';
-  if (category == 'disney+') return 'assets/disney-plus.png';
-  if (category == 'star+') return 'assets/star-plus.png';
-  if (category == 'coffee') return 'assets/coffee.png';
-  if (category == 'food') return 'assets/food.png';
-  if (category == 'starbucks') return 'assets/starbucks.png';
-  if (category == 'energy') return 'assets/energy.png';
-  if (category == 'internet') return 'assets/wifi.png';
-  if (category == 'movie') return 'assets/movie.png';
-  if (category == 'travel') return 'assets/passport.png';
-  if (category == 'payment') return 'assets/payment.png';
+  if (category.toLowerCase() == 'netflix') return 'assets/netflix.png';
+  if (category.toLowerCase() == 'hbo') return 'assets/hbo.png';
+  if (category.toLowerCase() == 'disney+') return 'assets/disney-plus.png';
+  if (category.toLowerCase() == 'star+') return 'assets/star-plus.png';
+  if (category.toLowerCase() == 'coffee') return 'assets/coffee.png';
+  if (category.toLowerCase() == 'food') return 'assets/food.png';
+  if (category.toLowerCase() == 'starbucks') return 'assets/starbucks.png';
+  if (category.toLowerCase() == 'energy') return 'assets/energy.png';
+  if (category.toLowerCase() == 'internet') return 'assets/wifi.png';
+  if (category.toLowerCase() == 'movie') return 'assets/movie.png';
+  if (category.toLowerCase() == 'travel') return 'assets/passport.png';
+  if (category.toLowerCase() == 'payment') return 'assets/payment.png';
+  if (category.toLowerCase() == 'transfer') return 'assets/credit-cards.png';
 
-  return 'assets/credit-cards.png';
+  return 'assets/others.png';
 }
 
 String currency(String type, num value) {
