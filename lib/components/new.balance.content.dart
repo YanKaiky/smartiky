@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:smartiky/components/button.save.dart';
 
@@ -6,8 +6,12 @@ import 'package:smartiky/components/dropdown.new.balance.how.dart';
 import 'package:smartiky/components/dropdown.new.balance.list.dart';
 import 'package:smartiky/components/text.field.content.dart';
 import 'package:smartiky/components/text.field.date.dart';
+import 'package:smartiky/repositories/transactions.history.repository.dart';
 import 'package:smartiky/utils/colors.dart';
 import 'package:smartiky/utils/constants.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid();
 
 class NewBalanceContent extends StatefulWidget {
   const NewBalanceContent({
@@ -132,7 +136,23 @@ class _NewBalanceContentState extends State<NewBalanceContent> {
               },
             ),
             const Spacer(),
-            ButtonSave(label: 'Save', onTap: () {}),
+            ButtonSave(
+              onTap: () async {
+                await TransactionsHistoryRepository().createTransactionsHistory(
+                  guid: uuid.v4(),
+                  title: selectedItem,
+                  explain: explain.text,
+                  date:
+                      "${date.day < 10 ? "0${date.day}" : date.day}/${date.month < 10 ? "0${date.month}" : date.month}/${date.year}",
+                  type: selectedHow,
+                  value: double.parse(amount.text),
+                  category: selectedItem,
+                );
+
+                Navigator.of(context).pop();
+              },
+              label: 'Save',
+            ),
             const SizedBox(height: 30),
           ],
         ),

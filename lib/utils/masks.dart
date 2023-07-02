@@ -3,13 +3,38 @@ String ptBRDate(String value) {
   String formatToday =
       "${today.day.toString().padLeft(2, '0')}/${today.month.toString().padLeft(2, '0')}/${today.year.toString()}";
 
-  DateTime date = DateTime.parse(value);
-  String format =
-      "${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year.toString()}";
+  if (value == formatToday) return 'today - $value';
 
-  if (format == formatToday) return 'today';
+  final day = weekDay(usaDate(value).weekday);
 
-  return format;
+  return "$day - $value";
+}
+
+String weekDay(int value) {
+  switch (value) {
+    case 0:
+      return "sunday";
+    case 1:
+      return "monday";
+    case 2:
+      return "tuesday";
+    case 3:
+      return "wednesday";
+    case 4:
+      return "thursday";
+    case 5:
+      return "friday";
+    default:
+      return "saturday";
+  }
+}
+
+DateTime usaDate(String value) {
+  final format = value.split('/').reversed.join('-');
+
+  DateTime date = DateTime.parse(format);
+
+  return date;
 }
 
 String icons(String category) {
@@ -31,7 +56,7 @@ String icons(String category) {
 }
 
 String currency(String type, num value) {
-  if (type == 'output') return '\$ -$value';
+  if (type == 'Expand') return '\$ -$value';
 
   return '\$ $value';
 }

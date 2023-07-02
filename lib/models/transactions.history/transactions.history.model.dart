@@ -3,6 +3,7 @@ import 'dart:convert';
 class TransactionsHistoryModel {
   final String guid;
   final String title;
+  final String explain;
   final String date;
   final String type;
   final num value;
@@ -11,6 +12,7 @@ class TransactionsHistoryModel {
   TransactionsHistoryModel({
     required this.guid,
     required this.title,
+    required this.explain,
     required this.date,
     required this.type,
     required this.value,
@@ -20,6 +22,7 @@ class TransactionsHistoryModel {
   TransactionsHistoryModel copyWith({
     String? guid,
     String? title,
+    String? explain,
     String? date,
     String? type,
     num? value,
@@ -28,6 +31,7 @@ class TransactionsHistoryModel {
     return TransactionsHistoryModel(
       guid: guid ?? this.guid,
       title: title ?? this.title,
+      explain: explain ?? this.explain,
       date: date ?? this.date,
       type: type ?? this.type,
       value: value ?? this.value,
@@ -39,6 +43,7 @@ class TransactionsHistoryModel {
     return {
       'guid': guid,
       'title': title,
+      'explain': explain,
       'date': date,
       'type': type,
       'value': value,
@@ -50,6 +55,7 @@ class TransactionsHistoryModel {
     return TransactionsHistoryModel(
       guid: json['guid'] ?? '',
       title: json['title'] ?? '',
+      explain: json['explain'] ?? '',
       date: json['date'] ?? '',
       type: json['type'] ?? '',
       value: json['value'] ?? 0,

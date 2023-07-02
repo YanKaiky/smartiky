@@ -22,8 +22,6 @@ class App extends StatelessWidget {
               bodyText2: const TextStyle(color: AppColors.text),
             ),
       ),
-      // home: const HomeScreen(),
-      // home: const StatisticsScreen(),
       home: const AppBottomNavigationBar(),
     );
   }
