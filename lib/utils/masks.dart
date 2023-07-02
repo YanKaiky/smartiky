@@ -58,5 +58,5 @@ String icons(String category) {
 String currency(String type, num value) {
   if (type == 'Expand') return '\$ -$value';
 
-  return '\$ $value';
+  return 'R\$ $value';
 }

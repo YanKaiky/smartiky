@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:smartiky/repositories/transactions.history.repository.dart';
 import 'package:smartiky/utils/colors.dart';
 import 'package:smartiky/utils/constants.dart';
 
-class CardHeader extends StatelessWidget {
+class CardHeader extends StatefulWidget {
   const CardHeader({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<CardHeader> createState() => _CardHeaderState();
+}
+
+class _CardHeaderState extends State<CardHeader> {
+  final TransactionsHistoryRepository transactionsHistoryRepository =
+      TransactionsHistoryRepository();
+
+  num transactionsHistory = 0;
+  num transactionsExpensesHistory = 0;
+  num transactionsIncomesHistory = 0;
+
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +68,9 @@ class CardHeader extends StatelessWidget {
               ],
             ),
             const SizedBox(height: defaultPadding),
-            const Text(
-              '\$ 2,185.40',
-              style: TextStyle(
+            Text(
+              'R\$ $transactionsHistory',
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
                 color: AppColors.white,
@@ -114,18 +133,18 @@ class CardHeader extends StatelessWidget {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text(
-                    '\$ 255',
-                    style: TextStyle(
+                    'R\$ $transactionsIncomesHistory',
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: AppColors.white,
                     ),
                   ),
                   Text(
-                    '\$ 122.52',
-                    style: TextStyle(
+                    'R\$ $transactionsExpensesHistory',
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: AppColors.white,
@@ -138,5 +157,16 @@ class CardHeader extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future init() async {
+    final values =
+        await TransactionsHistoryRepository().getTotalTransactionsHistory();
+
+    transactionsHistory = values.total;
+    transactionsExpensesHistory = values.expenses;
+    transactionsIncomesHistory = values.incomes;
+
+    if (mounted) setState(() {});
   }
 }
