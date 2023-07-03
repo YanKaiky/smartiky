@@ -111,7 +111,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             ],
                           ),
                           const SizedBox(height: defaultPadding * 2),
-                          const Chart(),
+                          Chart(index: cardIndex),
                           const SizedBox(height: defaultPadding * 2),
                           const TitleListStatistics(
                             label: 'Top Spending',
