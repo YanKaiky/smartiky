@@ -44,7 +44,7 @@ class _DropDownNewBalanceHowState extends State<DropDownNewBalanceHow> {
               children: [
                 Icon(
                   e == 'Income' ? Icons.arrow_downward : Icons.arrow_upward,
-                  color: AppColors.primaryBlack,
+                  color: e == 'Income' ? AppColors.primaryBlack : Colors.red,
                   size: 19,
                 ),
                 const SizedBox(width: defaultPadding * 2),
@@ -78,7 +78,7 @@ class _DropDownNewBalanceHowState extends State<DropDownNewBalanceHow> {
         },
         icon: Icon(
           widget.value == 'Income' ? Icons.arrow_downward : Icons.arrow_upward,
-          color: AppColors.primaryBlack,
+          color: widget.value == 'Income' ? AppColors.primaryBlack : Colors.red,
           size: 19,
         ),
         hint: const Text(

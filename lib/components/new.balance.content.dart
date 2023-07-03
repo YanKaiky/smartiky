@@ -28,7 +28,7 @@ class _NewBalanceContentState extends State<NewBalanceContent> {
   final TextEditingController explain = TextEditingController();
   FocusNode ex = FocusNode();
 
-  final TextEditingController amount = TextEditingController();
+  final TextEditingController amount = TextEditingController(text: '0,00');
   FocusNode am = FocusNode();
 
   String selectedItem = "Others";
@@ -96,11 +96,13 @@ class _NewBalanceContentState extends State<NewBalanceContent> {
             const SizedBox(height: 30),
             TextFieldContent(
               labelText: "Explain...",
+              prefixIcon: Icons.abc_rounded,
               controller: explain,
               focusNode: ex,
             ),
             const SizedBox(height: 30),
             TextFieldContent(
+              prefix: 'R\$ ',
               labelText: "Amount",
               controller: amount,
               focusNode: am,
@@ -145,7 +147,9 @@ class _NewBalanceContentState extends State<NewBalanceContent> {
                   date:
                       "${date.day < 10 ? "0${date.day}" : date.day}/${date.month < 10 ? "0${date.month}" : date.month}/${date.year}",
                   type: selectedHow,
-                  value: double.parse(amount.text),
+                  value: double.parse(
+                    amount.text.replaceAll('.', '').replaceAll(',', '.'),
+                  ),
                   category: selectedItem,
                 );
 

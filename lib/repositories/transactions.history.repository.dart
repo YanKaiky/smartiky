@@ -36,25 +36,48 @@ class TransactionsHistoryRepository {
       await Hive.openBox<TransactionsHistoryModel>('transactions');
       final box = Hive.box<TransactionsHistoryModel>('transactions');
 
-      final List<TransactionsHistoryModel> values = box.values.where((element) {
-        DateTime datetime = DateTime.now();
+      DateTime datetime = DateTime.now();
 
-        if (period == 'week') {
-          return usaDate(element.date).day == datetime.day;
+      List<TransactionsHistoryModel> list = [];
+
+      if (period == 'week') {
+        List<TransactionsHistoryModel> week = [];
+
+        final month = box.values
+            .where((element) => usaDate(element.date).month == datetime.month)
+            .toList();
+
+        for (var i = 0; i < month.length; i++) {
+          int weekNumberToday =
+              (datetime.difference(DateTime(datetime.year, 1, 1)).inDays ~/ 7) +
+                  1;
+          int weekNumberValue = (usaDate(month[i].date)
+                      .difference(DateTime(usaDate(month[i].date).year, 1, 1))
+                      .inDays ~/
+                  7) +
+              1;
+
+          if (weekNumberToday == weekNumberValue) {
+            week.add(month[i]);
+          }
         }
 
-        if (period == 'month') {
-          return usaDate(element.date).month == datetime.month;
-        }
+        list = week;
+      } else if (period == 'month') {
+        list = box.values
+            .where((element) => usaDate(element.date).month == datetime.month)
+            .toList();
+      } else if (period == 'year') {
+        list = box.values
+            .where((element) => usaDate(element.date).year == datetime.year)
+            .toList();
+      } else {
+        list = box.values
+            .where((element) => usaDate(element.date).day == datetime.day)
+            .toList(); // today
+      }
 
-        if (period == 'year') {
-          return usaDate(element.date).year == datetime.year;
-        }
-
-        return usaDate(element.date).day == datetime.day; // today
-      }).toList();
-
-      return values;
+      return list;
     } catch (e) {
       throw e.toString();
     }
