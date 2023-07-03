@@ -34,9 +34,8 @@ class RowTitles extends StatelessWidget {
                   Text(
                     secondTitle!,
                     style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19,
-                      color: AppColors.text,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.grey,
                     ),
                   ),
                 ],

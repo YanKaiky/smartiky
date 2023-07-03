@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 String ptBRDate(String value) {
   DateTime today = DateTime.now();
   String formatToday =
@@ -56,7 +58,15 @@ String icons(String category) {
 }
 
 String currency(String type, num value) {
-  if (type == 'Expand') return '\$ -$value';
+  if (type == 'Expand') return 'R\$ -${currencyBRL(value)}';
 
-  return 'R\$ $value';
+  return 'R\$ ${currencyBRL(value)}';
+}
+
+String currencyBRL(num value) {
+  final format = NumberFormat.currency(locale: "pt_BR", symbol: "");
+
+  var formattedNumber = format.format(value);
+
+  return formattedNumber;
 }

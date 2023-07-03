@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             Header(),
-            RowTitles(title: 'Transactions history', secondTitle: 'See all'),
+            RowTitles(title: 'Transactions history', secondTitle: 'This Month'),
             TransactionsHistory()
           ],
         ),

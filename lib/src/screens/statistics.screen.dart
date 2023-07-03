@@ -28,7 +28,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
 
   @override
   void initState() {
-    init();
+    getTransactionsHistoryPeriod();
     super.initState();
   }
 
@@ -77,7 +77,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                                     cardIndex = i;
                                   });
 
-                                  init();
+                                  getTransactionsHistoryPeriod();
                                 },
                               ),
                             ),
@@ -171,7 +171,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     );
   }
 
-  Future init() async {
+  Future getTransactionsHistoryPeriod() async {
     switch (cardIndex) {
       case 0:
         transactionsHistory = await TransactionsHistoryRepository()

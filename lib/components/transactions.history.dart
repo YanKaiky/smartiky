@@ -72,8 +72,8 @@ class _TransactionsHistoryState extends State<TransactionsHistory> {
   }
 
   Future init() async {
-    transactionsHistory =
-        await TransactionsHistoryRepository().getTransactionsHistory();
+    transactionsHistory = await TransactionsHistoryRepository()
+        .getTransactionsHistoryPeriod(period: 'month');
 
     if (mounted) setState(() {});
   }

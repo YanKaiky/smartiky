@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smartiky/repositories/transactions.history.repository.dart';
 import 'package:smartiky/utils/colors.dart';
 import 'package:smartiky/utils/constants.dart';
+import 'package:smartiky/utils/masks.dart';
 
 class CardHeader extends StatefulWidget {
   const CardHeader({
@@ -69,7 +70,7 @@ class _CardHeaderState extends State<CardHeader> {
             ),
             const SizedBox(height: defaultPadding),
             Text(
-              'R\$ $transactionsHistory',
+              'R\$ ${currencyBRL(transactionsHistory)}',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
@@ -135,7 +136,7 @@ class _CardHeaderState extends State<CardHeader> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'R\$ $transactionsIncomesHistory',
+                    'R\$ ${currencyBRL(transactionsIncomesHistory)}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
@@ -143,7 +144,7 @@ class _CardHeaderState extends State<CardHeader> {
                     ),
                   ),
                   Text(
-                    'R\$ $transactionsExpensesHistory',
+                    'R\$ ${currencyBRL(transactionsExpensesHistory)}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
