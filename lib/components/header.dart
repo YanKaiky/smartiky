@@ -9,11 +9,11 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
+    return const SliverToBoxAdapter(
       child: SizedBox(
         height: 340,
         child: Stack(
-          children: const [
+          children: [
             HeaderInformation(),
             CardHeader(),
           ],

@@ -25,7 +25,7 @@ class HeaderInformation extends StatelessWidget {
             children: [
               Positioned(
                 top: 35,
-                left: 340,
+                left: MediaQuery.of(context).size.width - 60,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(7),
                   child: Container(
@@ -34,7 +34,7 @@ class HeaderInformation extends StatelessWidget {
                     color: AppColors.backWhite,
                     child: IconButton(
                       icon: const Icon(
-                        Icons.notification_add_outlined,
+                        Icons.notifications_none_outlined,
                         color: AppColors.white,
                       ),
                       onPressed: () {},
@@ -42,14 +42,14 @@ class HeaderInformation extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
+              const Padding(
+                padding: EdgeInsets.only(
                   top: defaultPadding * 3,
-                  left: defaultPadding,
+                  left: defaultPadding * 3,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'Good Afternoon',
                       style: TextStyle(

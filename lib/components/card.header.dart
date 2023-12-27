@@ -33,8 +33,8 @@ class _CardHeaderState extends State<CardHeader> {
       top: 140,
       left: 37,
       child: Container(
-        height: 170,
-        width: 320,
+        height: MediaQuery.of(context).size.height / 4.5,
+        width: MediaQuery.of(context).size.width / 1.25,
         padding: const EdgeInsets.all(defaultPadding + 5),
         decoration: BoxDecoration(
           boxShadow: const [
@@ -51,9 +51,9 @@ class _CardHeaderState extends State<CardHeader> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text(
                   'Total Balance',
                   style: TextStyle(
@@ -78,11 +78,11 @@ class _CardHeaderState extends State<CardHeader> {
               ),
             ),
             const SizedBox(height: (defaultPadding * 2) + 5),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     CircleAvatar(
                       radius: 13,
                       backgroundColor: AppColors.primary,
@@ -104,7 +104,7 @@ class _CardHeaderState extends State<CardHeader> {
                   ],
                 ),
                 Row(
-                  children: const [
+                  children: [
                     CircleAvatar(
                       radius: 13,
                       backgroundColor: AppColors.primary,
