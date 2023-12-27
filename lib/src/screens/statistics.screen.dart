@@ -96,10 +96,10 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: Row(
+                                child: const Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  children: const [
+                                  children: [
                                     Text('Expense'),
                                     Icon(
                                       Icons.arrow_downward_sharp,
@@ -129,19 +129,20 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             borderRadius: BorderRadius.circular(5),
                             child: Image.asset(
                                 icons(transactionsHistory[i].category),
-                                height: 50),
+                                height: 30),
                           ),
                           title: Text(
                             transactionsHistory[i].title,
                             style: const TextStyle(
-                              fontSize: 15,
+                              fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: AppColors.title,
                             ),
                           ),
                           subtitle: Text(
-                            transactionsHistory[i].date,
+                            ptBRDate(transactionsHistory[i].date),
                             style: const TextStyle(
+                              fontSize: 10,
                               fontWeight: FontWeight.w500,
                               color: AppColors.text,
                             ),
@@ -156,7 +157,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                               color: transactionsHistory[i].type == 'Expand'
                                   ? AppColors.secondary
                                   : AppColors.primaryBlack,
-                              fontSize: 19,
+                              fontSize: 15,
                             ),
                           ),
                         );

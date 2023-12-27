@@ -8,12 +8,12 @@ class NewBalance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: AppColors.bgcolor,
       body: SafeArea(
         child: Stack(
           alignment: AlignmentDirectional.center,
-          children: const [
+          children: [
             NewBalanceHeader(),
             NewBalanceContent(),
           ],
