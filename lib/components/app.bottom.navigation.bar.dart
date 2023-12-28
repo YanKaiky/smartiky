@@ -3,7 +3,7 @@ import 'package:smartiky/src/screens/home.screen.dart';
 import 'package:smartiky/src/screens/new.balance.dart';
 import 'package:smartiky/src/screens/profile.dart';
 import 'package:smartiky/src/screens/statistics.screen.dart';
-import 'package:smartiky/src/screens/wallet.dart';
+import 'package:smartiky/src/screens/notifications.dart';
 import 'package:smartiky/utils/colors.dart';
 import 'package:smartiky/utils/constants.dart';
 
@@ -19,7 +19,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
   List screen = [
     const HomeScreen(),
     const StatisticsScreen(),
-    const Wallet(),
+    const Notifications(),
     const Profile()
   ];
 
@@ -37,7 +37,10 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
         },
         backgroundColor: AppColors.primary,
         shape: const CircleBorder(),
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: AppColors.bgcolor,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -79,7 +82,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
                   });
                 },
                 child: Icon(
-                  Icons.account_balance_wallet_outlined,
+                  Icons.notifications_none_outlined,
                   size: 30,
                   color: menuIndex == 2 ? AppColors.primary : AppColors.white,
                 ),
