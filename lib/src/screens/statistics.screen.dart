@@ -88,7 +88,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             children: [
                               Container(
                                 width: 120,
-                                height: 40,
+                                height: 30,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color: AppColors.grey,
@@ -100,10 +100,16 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Text('Expense'),
+                                    Text(
+                                      'Expense',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
                                     Icon(
                                       Icons.arrow_downward_sharp,
                                       color: AppColors.grey,
+                                      size: 12,
                                     ),
                                   ],
                                 ),
