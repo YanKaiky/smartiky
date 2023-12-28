@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smartiky/src/screens/home.screen.dart';
 import 'package:smartiky/src/screens/new.balance.dart';
+import 'package:smartiky/src/screens/profile.dart';
 import 'package:smartiky/src/screens/statistics.screen.dart';
+import 'package:smartiky/src/screens/wallet.dart';
 import 'package:smartiky/utils/colors.dart';
 import 'package:smartiky/utils/constants.dart';
 
@@ -17,8 +19,8 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
   List screen = [
     const HomeScreen(),
     const StatisticsScreen(),
-    const HomeScreen(),
-    const StatisticsScreen()
+    const Wallet(),
+    const Profile()
   ];
 
   @override
@@ -34,6 +36,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
           ));
         },
         backgroundColor: AppColors.primary,
+        shape: const CircleBorder(),
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

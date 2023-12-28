@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, use_build_context_synchronously
 import 'package:flutter/material.dart';
+import 'package:smartiky/components/app.bottom.navigation.bar.dart';
 import 'package:smartiky/components/button.save.dart';
 
 import 'package:smartiky/components/dropdown.new.balance.how.dart';
@@ -153,7 +154,13 @@ class _NewBalanceContentState extends State<NewBalanceContent> {
                   category: selectedItem,
                 );
 
-                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const AppBottomNavigationBar();
+                    },
+                  ),
+                );
               },
               label: 'Save',
             ),
