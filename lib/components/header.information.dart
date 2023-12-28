@@ -26,17 +26,14 @@ class HeaderInformation extends StatelessWidget {
               Positioned(
                 top: 35,
                 left: MediaQuery.of(context).size.width - 60,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(7),
-                  child: const SizedBox(
-                    height: 40,
-                    width: 40,
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.backWhite,
-                      child: Icon(
-                        Icons.person,
-                        color: AppColors.bgcolor,
-                      ),
+                child: const SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.backWhite,
+                    child: Icon(
+                      Icons.person,
+                      color: AppColors.bgcolor,
                     ),
                   ),
                 ),
