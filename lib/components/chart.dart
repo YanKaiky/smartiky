@@ -43,9 +43,9 @@ class _ChartState extends State<Chart> {
       child: LineChart(
         LineChartData(
           minX: 0,
-          maxX: 11,
+          maxX: widget.index == 0 ? 6 : 11,
           minY: 0,
-          maxY: 6000,
+          maxY: widget.index == 0 ? 1000 : 6000,
           titlesData: FlTitlesData(
             topTitles: const AxisTitles(
               sideTitles: SideTitles(showTitles: false),
@@ -76,20 +76,30 @@ class _ChartState extends State<Chart> {
           borderData: FlBorderData(show: false),
           lineBarsData: [
             LineChartBarData(
-              spots: [
-                FlSpot(0, filterDataByMonth(1)),
-                FlSpot(1, filterDataByMonth(2)),
-                FlSpot(2, filterDataByMonth(3)),
-                FlSpot(3, filterDataByMonth(4)),
-                FlSpot(4, filterDataByMonth(5)),
-                FlSpot(5, filterDataByMonth(6)),
-                FlSpot(6, filterDataByMonth(7)),
-                FlSpot(7, filterDataByMonth(8)),
-                FlSpot(8, filterDataByMonth(9)),
-                FlSpot(9, filterDataByMonth(10)),
-                FlSpot(10, filterDataByMonth(11)),
-                FlSpot(11, filterDataByMonth(12)),
-              ],
+              spots: widget.index == 0
+                  ? [
+                      FlSpot(0, filterDataByWeekday(1)),
+                      FlSpot(1, filterDataByWeekday(2)),
+                      FlSpot(2, filterDataByWeekday(3)),
+                      FlSpot(3, filterDataByWeekday(4)),
+                      FlSpot(4, filterDataByWeekday(5)),
+                      FlSpot(5, filterDataByWeekday(6)),
+                      FlSpot(6, filterDataByWeekday(7)),
+                    ]
+                  : [
+                      FlSpot(0, filterDataByYear(1)),
+                      FlSpot(1, filterDataByYear(2)),
+                      FlSpot(2, filterDataByYear(3)),
+                      FlSpot(3, filterDataByYear(4)),
+                      FlSpot(4, filterDataByYear(5)),
+                      FlSpot(5, filterDataByYear(6)),
+                      FlSpot(6, filterDataByYear(7)),
+                      FlSpot(7, filterDataByYear(8)),
+                      FlSpot(8, filterDataByYear(9)),
+                      FlSpot(9, filterDataByYear(10)),
+                      FlSpot(10, filterDataByYear(11)),
+                      FlSpot(11, filterDataByYear(12)),
+                    ],
               isCurved: true,
               color: AppColors.primary,
             ),
@@ -106,46 +116,76 @@ class _ChartState extends State<Chart> {
     );
 
     Widget text;
-    switch (value.toInt()) {
-      case 0:
-        text = const Text('JAN', style: style);
-        break;
-      case 1:
-        text = const Text('FEB', style: style);
-        break;
-      case 2:
-        text = const Text('MAR', style: style);
-        break;
-      case 3:
-        text = const Text('APR', style: style);
-        break;
-      case 4:
-        text = const Text('MAY', style: style);
-        break;
-      case 5:
-        text = const Text('JUN', style: style);
-        break;
-      case 6:
-        text = const Text('JUL', style: style);
-        break;
-      case 7:
-        text = const Text('AUG', style: style);
-        break;
-      case 8:
-        text = const Text('SEP', style: style);
-        break;
-      case 9:
-        text = const Text('OCT', style: style);
-        break;
-      case 10:
-        text = const Text('NOV', style: style);
-        break;
-      case 11:
-        text = const Text('DEC', style: style);
-        break;
-      default:
-        text = const Text('', style: style);
-        break;
+
+    if (widget.index == 0) {
+      switch (value.toInt()) {
+        case 0:
+          text = const Text('Sun', style: style);
+          break;
+        case 1:
+          text = const Text('Mon', style: style);
+          break;
+        case 2:
+          text = const Text('Tur', style: style);
+          break;
+        case 3:
+          text = const Text('Wen', style: style);
+          break;
+        case 4:
+          text = const Text('Thu', style: style);
+          break;
+        case 5:
+          text = const Text('Fri', style: style);
+          break;
+        case 6:
+          text = const Text('Sat', style: style);
+          break;
+        default:
+          text = const Text('', style: style);
+          break;
+      }
+    } else {
+      switch (value.toInt()) {
+        case 0:
+          text = const Text('JAN', style: style);
+          break;
+        case 1:
+          text = const Text('FEB', style: style);
+          break;
+        case 2:
+          text = const Text('MAR', style: style);
+          break;
+        case 3:
+          text = const Text('APR', style: style);
+          break;
+        case 4:
+          text = const Text('MAY', style: style);
+          break;
+        case 5:
+          text = const Text('JUN', style: style);
+          break;
+        case 6:
+          text = const Text('JUL', style: style);
+          break;
+        case 7:
+          text = const Text('AUG', style: style);
+          break;
+        case 8:
+          text = const Text('SEP', style: style);
+          break;
+        case 9:
+          text = const Text('OCT', style: style);
+          break;
+        case 10:
+          text = const Text('NOV', style: style);
+          break;
+        case 11:
+          text = const Text('DEC', style: style);
+          break;
+        default:
+          text = const Text('', style: style);
+          break;
+      }
     }
 
     return SideTitleWidget(
@@ -180,13 +220,32 @@ class _ChartState extends State<Chart> {
     if (mounted) setState(() {});
   }
 
-  double filterDataByMonth(
+  double filterDataByWeekday(int targetWeekday) {
+    double val = 0.0;
+
+    DateTime now = DateTime.now();
+
+    for (var item in data) {
+      DateTime itemDate =
+          DateTime.parse(item.date.split('/').reversed.join('-'));
+
+      // Verifica se o item pertence ao mesmo dia da semana
+      if (itemDate.weekday == targetWeekday && itemDate.year == now.year) {
+        val += item.value;
+      }
+    }
+
+    return val;
+  }
+
+  double filterDataByYear(
     int targetMonth,
   ) {
     double val = 0.0;
 
     for (var item in data) {
-      DateTime itemDate = DateTime.parse(item.date.split('/').reversed.join('-'));
+      DateTime itemDate =
+          DateTime.parse(item.date.split('/').reversed.join('-'));
 
       if (itemDate.month == targetMonth) {
         val = val + item.value;

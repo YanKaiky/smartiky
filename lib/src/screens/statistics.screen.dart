@@ -18,7 +18,7 @@ class StatisticsScreen extends StatefulWidget {
 }
 
 class _StatisticsScreenState extends State<StatisticsScreen> {
-  List<String> moments = ['Day', 'Week', 'Month', 'Year'];
+  List<String> moments = ['Week', 'Month', 'Year'];
   int cardIndex = 0;
 
   final TransactionsHistoryRepository transactionsHistoryRepository =
