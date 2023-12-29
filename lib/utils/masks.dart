@@ -7,7 +7,7 @@ String ptBRDate(String value) {
 
   if (value == formatToday) return 'today - $value';
 
-  final day = weekDay(usaDate(value).weekday);
+  final day = weekDay(useDate(value).weekday);
 
   return "$day - $value";
 }
@@ -31,7 +31,7 @@ String weekDay(int value) {
   }
 }
 
-DateTime usaDate(String value) {
+DateTime useDate(String value) {
   final format = value.split('/').reversed.join('-');
 
   DateTime date = DateTime.parse(format);

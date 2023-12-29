@@ -44,15 +44,15 @@ class TransactionsHistoryRepository {
         List<TransactionsHistoryModel> week = [];
 
         final month = box.values
-            .where((element) => usaDate(element.date).month == datetime.month)
+            .where((element) => useDate(element.date).month == datetime.month)
             .toList();
 
         for (var i = 0; i < month.length; i++) {
           int weekNumberToday =
               (datetime.difference(DateTime(datetime.year, 1, 1)).inDays ~/ 7) +
                   1;
-          int weekNumberValue = (usaDate(month[i].date)
-                      .difference(DateTime(usaDate(month[i].date).year, 1, 1))
+          int weekNumberValue = (useDate(month[i].date)
+                      .difference(DateTime(useDate(month[i].date).year, 1, 1))
                       .inDays ~/
                   7) +
               1;
@@ -65,15 +65,15 @@ class TransactionsHistoryRepository {
         list = week;
       } else if (period == 'month') {
         list = box.values
-            .where((element) => usaDate(element.date).month == datetime.month)
+            .where((element) => useDate(element.date).month == datetime.month)
             .toList();
       } else if (period == 'year') {
         list = box.values
-            .where((element) => usaDate(element.date).year == datetime.year)
+            .where((element) => useDate(element.date).year == datetime.year)
             .toList();
       } else {
         list = box.values
-            .where((element) => usaDate(element.date).day == datetime.day)
+            .where((element) => useDate(element.date).day == datetime.day)
             .toList(); // today
       }
 

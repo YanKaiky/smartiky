@@ -20,19 +20,23 @@ class Chart extends StatefulWidget {
 class _ChartState extends State<Chart> {
   List<TransactionsHistoryModel> data = [];
 
-  final TransactionsHistoryRepository transactionsHistoryRepository =
-      TransactionsHistoryRepository();
-
-  List<TransactionsHistoryModel> transactionsHistory = [];
-
   @override
   void initState() {
-    getTransactionsHistoryPeriod();
     super.initState();
+    getTransactionsHistoryPeriod();
   }
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<void>(
+      future: getTransactionsHistoryPeriod(),
+      builder: (context, snapshot) {
+        return buildChart();
+      },
+    );
+  }
+
+  Widget buildChart() {
     return SizedBox(
       width: double.infinity,
       height: 400,
@@ -73,18 +77,18 @@ class _ChartState extends State<Chart> {
           lineBarsData: [
             LineChartBarData(
               spots: [
-                const FlSpot(0, 2313),
-                const FlSpot(1, 1983),
-                const FlSpot(2, 2543),
-                const FlSpot(3, 3008),
-                const FlSpot(4, 1024),
-                const FlSpot(5, 2343),
-                const FlSpot(6, 1573),
-                const FlSpot(7, 3000),
-                const FlSpot(8, 4733),
-                const FlSpot(9, 2774),
-                const FlSpot(10, 3421),
-                const FlSpot(11, 2331),
+                FlSpot(0, filterDataByMonth(1)),
+                FlSpot(1, filterDataByMonth(2)),
+                FlSpot(2, filterDataByMonth(3)),
+                FlSpot(3, filterDataByMonth(4)),
+                FlSpot(4, filterDataByMonth(5)),
+                FlSpot(5, filterDataByMonth(6)),
+                FlSpot(6, filterDataByMonth(7)),
+                FlSpot(7, filterDataByMonth(8)),
+                FlSpot(8, filterDataByMonth(9)),
+                FlSpot(9, filterDataByMonth(10)),
+                FlSpot(10, filterDataByMonth(11)),
+                FlSpot(11, filterDataByMonth(12)),
               ],
               isCurved: true,
               color: AppColors.primary,
@@ -174,5 +178,21 @@ class _ChartState extends State<Chart> {
     }
 
     if (mounted) setState(() {});
+  }
+
+  double filterDataByMonth(
+    int targetMonth,
+  ) {
+    double val = 0.0;
+
+    for (var item in data) {
+      DateTime itemDate = DateTime.parse(item.date.split('/').reversed.join('-'));
+
+      if (itemDate.month == targetMonth) {
+        val = val + item.value;
+      }
+    }
+
+    return val;
   }
 }
