@@ -18,6 +18,8 @@ class Chart extends StatefulWidget {
 }
 
 class _ChartState extends State<Chart> {
+  int currentMonth = DateTime.now().month;
+
   List<TransactionsHistoryModel> data = [];
 
   @override
@@ -43,7 +45,13 @@ class _ChartState extends State<Chart> {
       child: LineChart(
         LineChartData(
           minX: 0,
-          maxX: widget.index == 0 ? 6 : 11,
+          maxX: widget.index == 0
+              ? 6
+              : widget.index == 1 && currentMonth == 2
+                  ? 3
+                  : widget.index == 1 && currentMonth != 2
+                      ? 4
+                      : 11,
           minY: 0,
           maxY: widget.index == 0 ? 1000 : 6000,
           titlesData: FlTitlesData(
@@ -86,20 +94,35 @@ class _ChartState extends State<Chart> {
                       FlSpot(5, filterDataByWeekday(6)),
                       FlSpot(6, filterDataByWeekday(7)),
                     ]
-                  : [
-                      FlSpot(0, filterDataByYear(1)),
-                      FlSpot(1, filterDataByYear(2)),
-                      FlSpot(2, filterDataByYear(3)),
-                      FlSpot(3, filterDataByYear(4)),
-                      FlSpot(4, filterDataByYear(5)),
-                      FlSpot(5, filterDataByYear(6)),
-                      FlSpot(6, filterDataByYear(7)),
-                      FlSpot(7, filterDataByYear(8)),
-                      FlSpot(8, filterDataByYear(9)),
-                      FlSpot(9, filterDataByYear(10)),
-                      FlSpot(10, filterDataByYear(11)),
-                      FlSpot(11, filterDataByYear(12)),
-                    ],
+                  : widget.index == 1 && currentMonth == 2
+                      ? [
+                          FlSpot(0, filterDataByWeekday(1)),
+                          FlSpot(1, filterDataByWeekday(2)),
+                          FlSpot(2, filterDataByWeekday(3)),
+                          FlSpot(3, filterDataByWeekday(4)),
+                        ]
+                      : widget.index == 1 && currentMonth != 2
+                          ? [
+                              FlSpot(0, filterDataByWeekday(1)),
+                              FlSpot(1, filterDataByWeekday(2)),
+                              FlSpot(2, filterDataByWeekday(3)),
+                              FlSpot(3, filterDataByWeekday(4)),
+                              FlSpot(4, filterDataByWeekday(5)),
+                            ]
+                          : [
+                              FlSpot(0, filterDataByYear(1)),
+                              FlSpot(1, filterDataByYear(2)),
+                              FlSpot(2, filterDataByYear(3)),
+                              FlSpot(3, filterDataByYear(4)),
+                              FlSpot(4, filterDataByYear(5)),
+                              FlSpot(5, filterDataByYear(6)),
+                              FlSpot(6, filterDataByYear(7)),
+                              FlSpot(7, filterDataByYear(8)),
+                              FlSpot(8, filterDataByYear(9)),
+                              FlSpot(9, filterDataByYear(10)),
+                              FlSpot(10, filterDataByYear(11)),
+                              FlSpot(11, filterDataByYear(12)),
+                            ],
               isCurved: true,
               color: AppColors.primary,
             ),
@@ -115,7 +138,7 @@ class _ChartState extends State<Chart> {
       fontSize: 6,
     );
 
-    Widget text;
+    Widget text = const Text('');
 
     if (widget.index == 0) {
       switch (value.toInt()) {
@@ -143,6 +166,68 @@ class _ChartState extends State<Chart> {
         default:
           text = const Text('', style: style);
           break;
+      }
+    } else if (widget.index == 1) {
+      bool isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+      }
+
+      int currentYear = DateTime.now().year;
+      bool isCurrentYearLeap = isLeapYear(currentYear);
+
+      int month = value.toInt() + 1;
+
+      int getDaysInMonth() {
+        switch (month) {
+          case 1:
+            return 31;
+          case 2:
+            return isCurrentYearLeap ? 29 : 28;
+          case 3:
+            return 31;
+          case 4:
+            return 30;
+          case 5:
+            return 31;
+          case 6:
+            return 30;
+          case 7:
+            return 31;
+          case 8:
+            return 31;
+          case 9:
+            return 30;
+          case 10:
+            return 31;
+          case 11:
+            return 30;
+          case 12:
+            return 31;
+          default:
+            return 0;
+        }
+      }
+
+      int daysInMonth = getDaysInMonth();
+      int daysPerWeek = 7;
+
+      // Calcula o número de semanas no mês
+      int weeksInMonth = (daysInMonth / daysPerWeek).ceil();
+
+      // Calcula o intervalo de dias para cada semana
+      int startDay = 1;
+      int endDay = daysPerWeek;
+
+      // Calcula os rótulos para a semana do mês
+      for (int week = 0; week < weeksInMonth; week++) {
+        if (value >= week && value < week + 1) {
+          text = Text('$startDay-$endDay', style: style);
+          break;
+        }
+        startDay = endDay + 1;
+        endDay = (endDay + daysPerWeek) > daysInMonth
+            ? daysInMonth
+            : (endDay + daysPerWeek);
       }
     } else {
       switch (value.toInt()) {

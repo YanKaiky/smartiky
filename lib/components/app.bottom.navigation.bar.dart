@@ -8,14 +8,16 @@ import 'package:smartiky/utils/colors.dart';
 import 'package:smartiky/utils/constants.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
-  const AppBottomNavigationBar({super.key});
+  final int? index;
+
+  const AppBottomNavigationBar({super.key, this.index});
 
   @override
   State<AppBottomNavigationBar> createState() => _AppBottomNavigationBarState();
 }
 
 class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
-  int menuIndex = 0;
+  late int menuIndex = widget.index ?? 0;
   List screen = [
     const HomeScreen(),
     const StatisticsScreen(),
