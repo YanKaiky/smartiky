@@ -21,7 +21,7 @@ class CardMomentStatistic extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 40,
+        height: 30,
         width: 80,
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -32,7 +32,7 @@ class CardMomentStatistic extends StatelessWidget {
           label,
           style: TextStyle(
             color: color,
-            fontSize: 16,
+            fontSize: 13,
             fontWeight: FontWeight.w500,
           ),
         ),

@@ -83,6 +83,38 @@ class TransactionsHistoryRepository {
     }
   }
 
+  Future<Map<int, double>> getTransactionsHistoryByYear() async {
+    try {
+      await Hive.openBox<TransactionsHistoryModel>('transactions');
+      final box = Hive.box<TransactionsHistoryModel>('transactions');
+
+      DateTime datetime = DateTime.now();
+
+      // ignore: prefer_for_elements_to_map_fromiterable
+      final monthlySums = Map<int, double>.fromIterable(
+        List<int>.generate(12, (i) => i + 1),
+        key: (item) => item,
+        value: (item) => 0.0,
+      );
+
+      box.values
+          .where((element) => useDate(element.date).year == datetime.year)
+          .forEach((element) {
+        DateTime itemDate =
+            DateTime.parse(element.date.split('/').reversed.join('-'));
+        int month = itemDate.month;
+        num value = element.value;
+
+        // Adiciona o valor ao total do mês
+        monthlySums[month] = monthlySums[month]! + value;
+      });
+
+      return monthlySums;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
   Future<List<TransactionsHistoryModel>> getTransactionsHistory() async {
     try {
       await Hive.openBox<TransactionsHistoryModel>('transactions');

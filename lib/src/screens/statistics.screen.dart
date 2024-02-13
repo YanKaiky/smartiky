@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:smartiky/components/card.moment.statistic.dart';
+import 'package:smartiky/components/charts/chart.by.year.dart';
 
-import 'package:smartiky/components/chart.dart';
 import 'package:smartiky/components/title.list.statistics.dart';
 import 'package:smartiky/models/transactions.history/transactions.history.model.dart';
 import 'package:smartiky/repositories/transactions.history.repository.dart';
@@ -18,7 +18,7 @@ class StatisticsScreen extends StatefulWidget {
 }
 
 class _StatisticsScreenState extends State<StatisticsScreen> {
-  List<String> moments = ['Week', 'Month', 'Year'];
+  List<String> moments = ['Week', 'Month', 'Six months', 'Year'];
   int cardIndex = 0;
 
   final TransactionsHistoryRepository transactionsHistoryRepository =
@@ -117,7 +117,8 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                             ],
                           ),
                           const SizedBox(height: defaultPadding * 2),
-                          Chart(index: cardIndex),
+                          const ChartByYear(),
+                          // Chart(index: cardIndex),
                           const SizedBox(height: defaultPadding * 2),
                           const TitleListStatistics(
                             label: 'Top Spending',

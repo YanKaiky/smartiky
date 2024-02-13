@@ -51,7 +51,9 @@ class _ChartState extends State<Chart> {
                   ? 3
                   : widget.index == 1 && currentMonth != 2
                       ? 4
-                      : 11,
+                      : widget.index == 2
+                          ? 5
+                          : 11,
           minY: 0,
           maxY: widget.index == 0 ? 1000 : 6000,
           titlesData: FlTitlesData(
@@ -109,20 +111,29 @@ class _ChartState extends State<Chart> {
                               FlSpot(3, filterDataByWeekday(4)),
                               FlSpot(4, filterDataByWeekday(5)),
                             ]
-                          : [
-                              FlSpot(0, filterDataByYear(1)),
-                              FlSpot(1, filterDataByYear(2)),
-                              FlSpot(2, filterDataByYear(3)),
-                              FlSpot(3, filterDataByYear(4)),
-                              FlSpot(4, filterDataByYear(5)),
-                              FlSpot(5, filterDataByYear(6)),
-                              FlSpot(6, filterDataByYear(7)),
-                              FlSpot(7, filterDataByYear(8)),
-                              FlSpot(8, filterDataByYear(9)),
-                              FlSpot(9, filterDataByYear(10)),
-                              FlSpot(10, filterDataByYear(11)),
-                              FlSpot(11, filterDataByYear(12)),
-                            ],
+                          : widget.index == 2
+                              ? [
+                                  FlSpot(0, filterDataByYear(1)),
+                                  FlSpot(1, filterDataByYear(2)),
+                                  FlSpot(2, filterDataByYear(3)),
+                                  FlSpot(3, filterDataByYear(4)),
+                                  FlSpot(4, filterDataByYear(5)),
+                                  FlSpot(5, filterDataByYear(6)),
+                                ]
+                              : [
+                                  FlSpot(0, filterDataByYear(1)),
+                                  FlSpot(1, filterDataByYear(2)),
+                                  FlSpot(2, filterDataByYear(3)),
+                                  FlSpot(3, filterDataByYear(4)),
+                                  FlSpot(4, filterDataByYear(5)),
+                                  FlSpot(5, filterDataByYear(6)),
+                                  FlSpot(6, filterDataByYear(7)),
+                                  FlSpot(7, filterDataByYear(8)),
+                                  FlSpot(8, filterDataByYear(9)),
+                                  FlSpot(9, filterDataByYear(10)),
+                                  FlSpot(10, filterDataByYear(11)),
+                                  FlSpot(11, filterDataByYear(12)),
+                                ],
               isCurved: true,
               color: AppColors.primary,
             ),
@@ -143,25 +154,25 @@ class _ChartState extends State<Chart> {
     if (widget.index == 0) {
       switch (value.toInt()) {
         case 0:
-          text = const Text('Sun', style: style);
-          break;
-        case 1:
           text = const Text('Mon', style: style);
           break;
-        case 2:
+        case 1:
           text = const Text('Tur', style: style);
           break;
-        case 3:
+        case 2:
           text = const Text('Wen', style: style);
           break;
-        case 4:
+        case 3:
           text = const Text('Thu', style: style);
           break;
-        case 5:
+        case 4:
           text = const Text('Fri', style: style);
           break;
-        case 6:
+        case 5:
           text = const Text('Sat', style: style);
+          break;
+        case 6:
+          text = const Text('Sun', style: style);
           break;
         default:
           text = const Text('', style: style);
@@ -308,14 +319,13 @@ class _ChartState extends State<Chart> {
   double filterDataByWeekday(int targetWeekday) {
     double val = 0.0;
 
-    DateTime now = DateTime.now();
+    DateTime datetime = DateTime.now();
 
     for (var item in data) {
       DateTime itemDate =
           DateTime.parse(item.date.split('/').reversed.join('-'));
 
-      // Verifica se o item pertence ao mesmo dia da semana
-      if (itemDate.weekday == targetWeekday && itemDate.year == now.year) {
+      if (itemDate.weekday == targetWeekday && itemDate.year == datetime.year) {
         val += item.value;
       }
     }
