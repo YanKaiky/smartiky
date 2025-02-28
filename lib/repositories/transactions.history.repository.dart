@@ -14,7 +14,7 @@ class TransactionsHistoryRepository {
         },
         {
           "guid": "ac0f8cc8-06bd-4b21-b6c4-f0eb0000276e",
-          "title": 'FasCheckin',
+          "title": 'FastCheckin',
           "date": '2023-06-25',
           "type": 'entry',
           "value": 131,

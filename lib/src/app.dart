@@ -18,8 +18,10 @@ class App extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: AppColors.white)
             .copyWith(
-              bodyText1: const TextStyle(color: AppColors.text),
-              bodyText2: const TextStyle(color: AppColors.text),
+              bodyLarge: const TextStyle(
+                  color: AppColors.text), // bodyText1 -> bodyLarge
+              bodyMedium: const TextStyle(
+                  color: AppColors.text), // bodyText2 -> bodyMedium
             ),
       ),
       // home: const HomeScreen(),

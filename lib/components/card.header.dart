@@ -4,8 +4,8 @@ import 'package:smartiky/utils/constants.dart';
 
 class CardHeader extends StatelessWidget {
   const CardHeader({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class CardHeader extends StatelessWidget {
       top: 140,
       left: 37,
       child: Container(
-        height: 170,
+        height: 180,
         width: 320,
         padding: const EdgeInsets.all(defaultPadding + 5),
         decoration: BoxDecoration(
